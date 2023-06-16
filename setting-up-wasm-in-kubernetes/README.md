@@ -11,9 +11,6 @@ k3d cluster create wasm-cluster \
 ```kubectl get nodes ```
 
 
-
-
-```
 [holiodin@fedora wasm-wave]$ docker exec -it k3d-wasm-cluster-agent-0 ash
 / # ls /bin | grep containerd-
 containerd-shim-runc-v2
