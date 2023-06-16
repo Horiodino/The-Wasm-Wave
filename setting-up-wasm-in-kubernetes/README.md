@@ -64,23 +64,27 @@ PID   USER     COMMAND
 [plugins.cri.containerd.runtimes.slight]
   runtime_type = "io.containerd.slight.v1"
 / # exit
+```
 
 
-
+```
 [holiodin@fedora wasm-wave]$ kubectl get nodes --show-labels
 NAME                        STATUS   ROLES                  AGE     VERSION        LABELS
 k3d-wasm-cluster-agent-0    Ready    <none>                 6m11s   v1.24.6+k3s1   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/instance-type=k3s,beta.kubernetes.io/os=linux,egress.k3s.io/cluster=true,kubernetes.io/arch=amd64,kubernetes.io/hostname=k3d-wasm-cluster-agent-0,kubernetes.io/os=linux,node.kubernetes.io/instance-type=k3s
 k3d-wasm-cluster-agent-1    Ready    <none>                 6m11s   v1.24.6+k3s1   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/instance-type=k3s,beta.kubernetes.io/os=linux,egress.k3s.io/cluster=true,kubernetes.io/arch=amd64,kubernetes.io/hostname=k3d-wasm-cluster-agent-1,kubernetes.io/os=linux,node.kubernetes.io/instance-type=k3s
 k3d-wasm-cluster-server-0   Ready    control-plane,master   6m17s   v1.24.6+k3s1   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/instance-type=k3s,beta.kubernetes.io/os=linux,egress.k3s.io/cluster=true,kubernetes.io/arch=amd64,kubernetes.io/hostname=k3d-wasm-cluster-server-0,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=true,node-role.kubernetes.io/master=true,node.kubernetes.io/instance-type=k3s
+```
 
 
+```
 [holiodin@fedora wasm-wave]$ kubectl label nodes k3d-wasm-cluster-agent-0 spin=yes
 node/k3d-wasm-cluster-agent-0 labeled
 [holiodin@fedora wasm-wave]$ kubectl get nodes --show-labels | grep spin
 k3d-wasm-cluster-agent-0    Ready    <none>                 9m39s   v1.24.6+k3s1   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/instance-type=k3s,beta.kubernetes.io/os=linux,egress.k3s.io/cluster=true,kubernetes.io/arch=amd64,kubernetes.io/hostname=k3d-wasm-cluster-agent-0,kubernetes.io/os=linux,node.kubernetes.io/instance-type=k3s,spin=yes
+```
 
 
-
+```
 [holiodin@fedora wasm-wave]$ kubectl apply -f - <<EOF
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
@@ -92,17 +96,20 @@ scheduling:
     spin: "yes"
 EOF
 runtimeclass.node.k8s.io/spin-test created
+```
 
 
+```
 [holiodin@fedora wasm-wave]$ kubectl apply \
 -f https://raw.githubusercontent.com/nigelpoulton/spin1/main/app.yml
 deployment.apps/wasm-spin created
 service/wasm-spin created
 middleware.traefik.containo.us/strip-prefix created
 ingress.networking.k8s.io/wasm-ingress created
+```
 
 
-
+```
 [holiodin@fedora wasm-wave]$ kubectl get pods
 NAME                        READY   STATUS    RESTARTS   AGE
 wasm-spin-5bd4bd7b9-ss7vz   1/1     Running   0          63s
