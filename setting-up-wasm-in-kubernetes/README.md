@@ -8,9 +8,14 @@ k3d cluster create wasm-cluster \
 
 ```
 
-```kubectl get nodes ```
+```kubectl get nodes
+NAME                        STATUS   ROLES                  AGE   VERSION
+k3d-wasm-cluster-agent-1    Ready    <none>                 19m   v1.24.6+k3s1
+k3d-wasm-cluster-agent-0    Ready    <none>                 19m   v1.24.6+k3s1
+k3d-wasm-cluster-server-0   Ready    control-plane,master   19m   v1.24.6+k3s1
+ ```
 
-
+```
 [holiodin@fedora wasm-wave]$ docker exec -it k3d-wasm-cluster-agent-0 ash
 / # ls /bin | grep containerd-
 containerd-shim-runc-v2
